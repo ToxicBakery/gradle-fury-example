@@ -1,0 +1,20 @@
+
+buildscript {
+    ext.kotlin_version = '1.0.5-2'
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+subprojects {
+    // username/password defined in ~/.gradle/gradle.properties or local.properties
+    NEXUS_USERNAME = sonatype_user
+    NEXUS_PASSWORD = sonatype_pass
+    version = property("pom.version")
+    group = property("pom.groupId")
+
+    apply from: "${rootDir}/gradle-fury/gradle/maven-support.gradle"
+}
